@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 // import type {Node} from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {Button, Pressable, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
 
 const App = () => {
-
   const [name, setName] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const onPressHandler = () => {
+    setSubmitted(!submitted);
+  };
 
   return (
     <View style={styles.body}>
@@ -13,9 +16,34 @@ const App = () => {
         multiline
         style={styles.input}
         placeholder="e.g. John"
-        onChangeText={(value) => setName(value)}
+        onChangeText={value => setName(value)}
       />
-      <Text style={styles.text}>Your name is: {name}</Text>
+      {/* <Button
+        title={submitted ? 'Clear' : 'Submit'}
+        onPress={onPressHandler}
+        color="#00f"
+      /> */}
+      {/* <TouchableWithoutFeedback
+        onPress={onPressHandler}
+        activeOpacity={0.5}
+        underlayColor="#dddddd">
+        <View style={styles.button}>
+          <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+        </View>
+      </TouchableWithoutFeedback> */}
+      <Pressable
+        onPress={onPressHandler}
+        hitSlop={{top: 10, bottom: 10, right: 10, left: 10}}
+        android_ripple={{color: '#00f'}}
+        style={({pressed}) => [
+          {backgroundColor: pressed ? '#dddddd' : '#00ff00'},
+          styles.button,
+        ]}>
+        <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+      </Pressable>
+      {submitted ? (
+        <Text style={styles.text}>You are registered as {name}</Text>
+      ) : null}
     </View>
   );
 };
@@ -38,6 +66,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     textAlign: 'center',
     fontSize: 20,
+    marginBottom: 10,
+  },
+  button: {
+    width: 150,
+    height: 50,
+    alignItems: 'center',
   },
 });
 
