@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#000000',
-    fontSize: 45,
+    fontSize: 46,
     fontStyle: 'italic',
     margin: 10,
   },
