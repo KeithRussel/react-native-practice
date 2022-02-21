@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 // import type {Node} from 'react';
 import {
+  Image,
+  ImageBackground,
   Modal,
   Pressable,
   StyleSheet,
@@ -22,7 +24,11 @@ const App = () => {
   };
 
   return (
-    <View style={styles.body}>
+    <ImageBackground
+      style={styles.body}
+      source={{
+        uri: 'https://cdn.vox-cdn.com/thumbor/Gg1MpR0z5829nHwlFcHGVUEnV94=/0x0:1456x747/920x613/filters:focal(612x258:844x490):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/69990832/https___bucketeer_e05bbc84_baa3_437e_9518_adb32be77984.s3.amazonaws.com_public_images_418f3acf_2d81_4f05_ad62_2c875ec2c33f_4463x2289.0.png',
+      }}>
       <Modal
         visible={showWarning}
         transparent
@@ -79,9 +85,23 @@ const App = () => {
         <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
       </Pressable>
       {submitted ? (
-        <Text style={styles.text}>You are registered as {name}</Text>
-      ) : null}
-    </View>
+        <View style={styles.body}>
+          <Text style={styles.text}>You are registered as {name}</Text>
+          <Image
+            source={require('./assets/done.png')}
+            resizeMode="stretch"
+            style={styles.image}
+          />
+        </View>
+      ) : (
+        <Image
+          source={require('./assets/error.png')}
+          resizeMode="stretch"
+          style={styles.image}
+          blurRadius={3}
+        />
+      )}
+    </ImageBackground>
   );
 };
 
@@ -142,6 +162,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#00ffff',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 10,
   },
 });
 
