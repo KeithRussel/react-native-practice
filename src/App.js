@@ -10,6 +10,8 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import MashButton from './CustomButton';
+import Header from './Header';
 
 const App = () => {
   const [name, setName] = useState('');
@@ -29,6 +31,7 @@ const App = () => {
       source={{
         uri: 'https://cdn.vox-cdn.com/thumbor/Gg1MpR0z5829nHwlFcHGVUEnV94=/0x0:1456x747/920x613/filters:focal(612x258:844x490):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/69990832/https___bucketeer_e05bbc84_baa3_437e_9518_adb32be77984.s3.amazonaws.com_public_images_418f3acf_2d81_4f05_ad62_2c875ec2c33f_4463x2289.0.png',
       }}>
+      <Header />
       <Modal
         visible={showWarning}
         transparent
@@ -61,20 +64,18 @@ const App = () => {
         placeholder="e.g. John"
         onChangeText={value => setName(value)}
       />
-      {/* <Button
+      <MashButton
+        onPressFunction={onPressHandler}
         title={submitted ? 'Clear' : 'Submit'}
-        onPress={onPressHandler}
-        color="#00f"
-      /> */}
-      {/* <TouchableWithoutFeedback
-        onPress={onPressHandler}
-        activeOpacity={0.5}
-        underlayColor="#dddddd">
-        <View style={styles.button}>
-          <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-        </View>
-      </TouchableWithoutFeedback> */}
-      <Pressable
+        color={'#00ff00'}
+      />
+      <MashButton
+        onPressFunction={onPressHandler}
+        title={'test'}
+        color={'#ff00ff'}
+        style={{margin: 10}}
+      />
+      {/* <Pressable
         onPress={onPressHandler}
         hitSlop={{top: 10, bottom: 10, right: 10, left: 10}}
         android_ripple={{color: '#00f'}}
@@ -83,19 +84,19 @@ const App = () => {
           styles.button,
         ]}>
         <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-      </Pressable>
+      </Pressable> */}
       {submitted ? (
         <View style={styles.body}>
           <Text style={styles.text}>You are registered as {name}</Text>
           <Image
-            source={require('./assets/done.png')}
+            source={require('../assets/done.png')}
             resizeMode="stretch"
             style={styles.image}
           />
         </View>
       ) : (
         <Image
-          source={require('./assets/error.png')}
+          source={require('../assets/error.png')}
           resizeMode="stretch"
           style={styles.image}
           blurRadius={3}
