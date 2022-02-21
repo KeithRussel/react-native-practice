@@ -1,12 +1,42 @@
 import React, {useState} from 'react';
 // import type {Node} from 'react';
-import {Button, Pressable, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
+import {Alert, Button, Pressable, StyleSheet, Text, TextInput, ToastAndroid, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
 
 const App = () => {
   const [name, setName] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const onPressHandler = () => {
-    setSubmitted(!submitted);
+    if (name.length > 3) {
+      setSubmitted(!submitted);
+    } else {
+      // Alert.alert(
+      //   'Warning',
+      //   'The name must be longer than 3 characters',
+      //   [
+      //     {
+      //       text: 'Do not show again',
+      //       onPress: () => console.warn('Do not show Pressed!'),
+      //       style: 'destructive',
+      //     },
+      //     {
+      //       text: 'Cancel',
+      //       onPress: () => console.warn('Cancel Pressed!'),
+      //       style: 'destructive',
+      //     },
+      //     {
+      //       text: 'OK',
+      //       onPress: () => console.warn('OK Pressed!'),
+      //       style: 'destructive',
+      //     },
+      //   ],
+      //   {cancelable: true, onDismiss: () => console.warn('Alert Dismissed!')},
+      // );
+      ToastAndroid.showWithGravity(
+        'The name must be longer than 3 characters',
+        ToastAndroid.LONG,
+        ToastAndroid.CENTER,
+      );
+    }
   };
 
   return (
