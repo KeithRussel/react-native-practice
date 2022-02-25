@@ -1,14 +1,10 @@
 import React from 'react';
-// import type {Node} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-// import {createStackNavigator} from '@react-navigation/stack';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-export default function ScreenA({navigation}) {
+export default function ScreenA({navigation, route}) {
   const onPressHandler = () => {
-    // navigation.navigate('Screen_B');
-    navigation.toggleDrawer();
+    navigation.navigate('Screen_B');
+    // navigation.toggleDrawer();
   };
 
   return (
@@ -17,8 +13,9 @@ export default function ScreenA({navigation}) {
       <Pressable
         onPress={onPressHandler}
         style={({pressed}) => ({backgroundColor: pressed ? '#ddd' : '#0f0'})}>
-        <Text style={styles.text}>Toggle Drawer</Text>
+        <Text style={styles.text}>Go to Screen B</Text>
       </Pressable>
+      <Text style={styles.text}>{route.params?.Message}</Text>
     </View>
   );
 }

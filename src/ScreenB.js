@@ -1,14 +1,13 @@
 import React from 'react';
-// import type {Node} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-// import {createStackNavigator} from '@react-navigation/stack';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-export default function ScreenB({navigation}) {
+export default function ScreenB({navigation, route}) {
+  const {ItemName, ItemId} = route.params;
+
   const onPressHandler = () => {
-    // navigation.navigate('Screen_A');
-    navigation.goBack();
+    navigation.navigate('Screen_A', {Message: 'message from B'});
+    // navigation.goBack();
+    // navigation.setParams({ItemId: 14});
   };
   return (
     <View style={styles.body}>
@@ -18,6 +17,8 @@ export default function ScreenB({navigation}) {
         style={({pressed}) => ({backgroundColor: pressed ? '#ddd' : '#0f0'})}>
         <Text style={styles.text}>Go Back to Screen A</Text>
       </Pressable>
+      <Text style={styles.text}>{ItemName}</Text>
+      <Text style={styles.text}>ID: {ItemId}</Text>
     </View>
   );
 }
