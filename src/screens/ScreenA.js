@@ -1,24 +1,22 @@
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
+import GlobalStyle from '../utils/GlobalStyle';
 
-export default function ScreenB({navigation, route}) {
-  const {ItemName, ItemId} = route.params;
-
+export default function ScreenA({navigation, route}) {
   const onPressHandler = () => {
-    navigation.navigate('Screen_A', {Message: 'message from B'});
-    // navigation.goBack();
-    // navigation.setParams({ItemId: 14});
+    navigation.navigate('Screen_B');
+    // navigation.toggleDrawer();
   };
+
   return (
     <View style={styles.body}>
-      <Text style={styles.text}>Screen B</Text>
+      <Text style={[GlobalStyle.CustomFont, styles.text]}>Screen A</Text>
       <Pressable
         onPress={onPressHandler}
         style={({pressed}) => ({backgroundColor: pressed ? '#ddd' : '#0f0'})}>
-        <Text style={styles.text}>Go Back to Screen A</Text>
+        <Text style={GlobalStyle.ButtonText}>Go to Screen B</Text>
       </Pressable>
-      <Text style={styles.text}>{ItemName}</Text>
-      <Text style={styles.text}>ID: {ItemId}</Text>
+      <Text style={styles.text}>{route.params?.Message}</Text>
     </View>
   );
 }
@@ -31,7 +29,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 40,
-    fontWeight: 'bold',
     margin: 10,
   },
 });
