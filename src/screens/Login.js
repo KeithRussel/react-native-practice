@@ -89,7 +89,7 @@ export default function Login({navigation}) {
 
   return (
     <View style={styles.body}>
-      <Image style={styles.logo} source={require('../../assets/redux.png')} />
+      {/* <Image style={styles.logo} source={require('../../assets/redux.png')} /> */}
       <Text style={styles.text}>Redux</Text>
       <TextInput
         style={styles.input}

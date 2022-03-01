@@ -12,7 +12,8 @@ import GlobalStyle from '../utils/GlobalStyle';
 import CustomButton from '../utils/CustomButton';
 import SQLite from 'react-native-sqlite-storage';
 import {useSelector, useDispatch} from 'react-redux';
-import {setName, setAge, increaseAge} from '../redux/actions';
+import {setName, setAge, increaseAge, getCities} from '../redux/actions';
+import {FlatList} from 'react-native-gesture-handler';
 
 const db = SQLite.openDatabase(
   {
@@ -26,7 +27,7 @@ const db = SQLite.openDatabase(
 );
 
 export default function Home({navigation, route}) {
-  const {name, age} = useSelector(state => state.userReducer);
+  const {name, age, cities} = useSelector(state => state.userReducer);
   const dispatch = useDispatch();
 
   // const [name, setName] = useState('');
@@ -34,6 +35,7 @@ export default function Home({navigation, route}) {
 
   useEffect(() => {
     getData();
+    dispatch(getCities());
   }, []);
 
   const getData = () => {
@@ -114,7 +116,17 @@ export default function Home({navigation, route}) {
       <Text style={[GlobalStyle.CustomFont, styles.text]}>
         Welcome {name} !
       </Text>
-      <Text style={[GlobalStyle.CustomFont, styles.text]}>
+      <FlatList
+        data={cities}
+        renderItem={({item}) => (
+          <View style={styles.item}>
+            <Text style={styles.title}>{item.country}</Text>
+            <Text style={styles.subtitle}>{item.city}</Text>
+          </View>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
+      {/* <Text style={[GlobalStyle.CustomFont, styles.text]}>
         Your age is {age}
       </Text>
       <TextInput
@@ -139,7 +151,7 @@ export default function Home({navigation, route}) {
         onPressFunction={() => {
           dispatch(increaseAge());
         }}
-      />
+      /> */}
     </View>
   );
 }
@@ -163,5 +175,24 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 130,
     marginBottom: 10,
+  },
+  item: {
+    backgroundColor: '#ffffff',
+    borderWidth: 2,
+    borderColor: '#cccccc',
+    borderRadius: 5,
+    margin: 7,
+    width: 350,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 30,
+    margin: 10,
+  },
+  subtitle: {
+    fontSize: 20,
+    margin: 10,
+    color: '#999999',
   },
 });
