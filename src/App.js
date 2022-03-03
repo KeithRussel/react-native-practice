@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from './screens/Home';
 import Login from './screens/Login';
+import Map from './screens/Map';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Provider} from 'react-redux';
 import {Store} from './redux/store';
@@ -37,24 +38,8 @@ function App() {
               headerShown: false,
             }}
           />
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{
-              title: 'Screen B title',
-              drawerIcon: ({focused}) => (
-                <FontAwesome5
-                  name="btc"
-                  size={focused ? 25 : 20}
-                  color={focused ? '#0080ff' : '#999999'}
-                />
-              ),
-            }}
-            initialParams={{
-              ItemName: 'Item from Drawer',
-              ItemId: 12,
-            }}
-          />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Map" component={Map} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

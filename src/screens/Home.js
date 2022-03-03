@@ -27,12 +27,9 @@ const db = SQLite.openDatabase(
   },
 );
 
-export default function Home({navigation, route}) {
+export default function Home({navigation}) {
   const {name, age, cities} = useSelector(state => state.userReducer);
   const dispatch = useDispatch();
-
-  // const [name, setName] = useState('');
-  // const [age, setAge] = useState('');
 
   useEffect(() => {
     getData();
@@ -147,6 +144,11 @@ export default function Home({navigation, route}) {
           <TouchableOpacity
             onPress={() => {
               handleNotification(item, index);
+              navigation.navigate('Map', {
+                city: item.city,
+                lat: item.lat,
+                lng: item.lng,
+              });
             }}>
             <View style={styles.item}>
               <Text style={styles.title}>{item.country}</Text>
