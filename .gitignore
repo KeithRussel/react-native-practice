@@ -29,6 +29,9 @@ build/
 local.properties
 *.iml
 *.hprof
+android/gradle.properties
+android/build.gradle
+android/app/build
 
 # node.js
 #
